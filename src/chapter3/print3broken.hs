@@ -8,4 +8,5 @@ main :: IO ()
 main = do
   putStrLn greeting
   printSecond
-  where greeting = "Yarrrrrrr!"
+
+greeting = "Yarrrrrrr!"
