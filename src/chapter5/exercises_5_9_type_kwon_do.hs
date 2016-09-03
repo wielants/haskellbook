@@ -8,7 +8,7 @@ f' :: Woot -> Blah
 f' = undefined
 
 g' :: (Blah, Woot) -> (Blah, Blah)
-g' = ???
+g' (b, w) = (b, f' w)
 
 
 -- 1)
@@ -19,7 +19,7 @@ g :: String -> Char
 g = undefined
 
 h :: Int -> Char
-h = ???
+h x = g (f x)
 
 -- 2)
 data A
@@ -33,7 +33,7 @@ w :: B -> C
 w = undefined
 
 e :: A -> C
-e = ???
+e x = w (q x)
 
 -- 3)
 data X
@@ -46,10 +46,13 @@ xz = undefined
 yz :: Y -> Z
 yz = undefined
 
-xform :: (X, Y) -> (Z, Z)
-xform = ???
+xform,xform',xform'' :: (X, Y) -> (Z, Z)
+xform (x,y) = (xz x, yz y)
+xform' (x,y) = (xz x, xz x)
+xform'' (x,y) = (yz y, yz y)
 
 -- 4)
 munge :: (x -> y) -> (y -> (w, z)) -> x -> w
-munge = ???
+munge f g x = let (w, z) = g (f x)
+              in w
 
