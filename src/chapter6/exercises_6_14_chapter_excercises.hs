@@ -30,3 +30,47 @@ data Mood = Blah | Woot deriving (Show, Eq)
 settleDown x = if x == Woot
                  then Blah
                  else x
+
+-- 3)
+-- a) acceptable inputs: Blah, Woot
+-- b) settleDown 9 would lead to an error, because there is no instance of Num Mood
+-- c) Blah > Woot would lead to an error, because there is no instance of Ord Mood
+
+
+-- 4) does typecheck!
+type Subject = String
+type Verb = String
+type Object = String
+
+data Sentence = Sentence Subject Verb Object deriving (Eq, Show)
+
+s1 = Sentence "dogs" "drool"
+s2 = Sentence "Julie" "loves" "dogs"
+
+
+-- Given the datatype declaration what can we do?
+data Rocks = Rocks String deriving (Eq, Show)
+data Yeah = Yeah Bool deriving (Eq, Show)
+data Papu = Papu Rocks Yeah deriving (Eq, Show)
+
+-- 1)
+-- does not typecheck: value constructor Papu needs values of type Rocks and Yeah not String and Bool!
+-- phew = Papu "chases" True
+phew = Papu (Rocks "chases") (Yeah True)
+
+-- 2)
+-- does typecheck
+truth = Papu (Rocks "chomzkydoz") (Yeah True)
+
+-- 3)
+-- does typecheck
+equalityForall :: Papu -> Papu -> Bool
+equalityForall p p' = p == p'
+
+-- 4)
+-- does not typecheck because there is no instance of Ord Papu!
+comparePapus :: Papu -> Papu -> Bool
+-- comparePapus p p' = p > p'
+comparePapus = undefined
+
+
