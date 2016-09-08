@@ -19,7 +19,7 @@ module Exercises_6_14_Chapter_Excercises where
 
 -- Does it typecheck?
 
-data Person = Person Bool
+data Person = Person Bool deriving Show
 
 printPerson :: Person -> IO ()
 printPerson person = putStrLn (show person)
