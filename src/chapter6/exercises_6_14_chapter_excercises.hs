@@ -25,7 +25,7 @@ printPerson :: Person -> IO ()
 printPerson person = putStrLn (show person)
 
 -- 2)
-data Mood = Blah | Woot deriving Show
+data Mood = Blah | Woot deriving (Show, Eq)
 
 settleDown x = if x == Woot
                  then Blah
