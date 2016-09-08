@@ -18,8 +18,15 @@ module Exercises_6_14_Chapter_Excercises where
 -- a) Int and Integer numbers
 
 -- Does it typecheck?
-
+-- 1)
 data Person = Person Bool deriving Show
 
 printPerson :: Person -> IO ()
 printPerson person = putStrLn (show person)
+
+-- 2)
+data Mood = Blah | Woot deriving Show
+
+settleDown x = if x == Woot
+                 then Blah
+                 else x
