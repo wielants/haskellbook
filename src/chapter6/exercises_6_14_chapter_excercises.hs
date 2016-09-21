@@ -1,5 +1,7 @@
 module Exercises_6_14_Chapter_Excercises where
 
+import Data.List (sort)
+
 -- Multiple Choice
 
 -- 1) The Eq class
@@ -73,4 +75,82 @@ comparePapus :: Papu -> Papu -> Bool
 -- comparePapus p p' = p > p'
 comparePapus = undefined
 
+-- Match the types
+-- 1)
+i1 :: Num a => a
+-- cannot be changed to "i1 :: a" because of 1 has type Num a
+i1 = 1
+
+-- 2)
+f2 :: Float
+-- cannot be changed to "f2 :: Num a => a" because 1.0 has type Fractional a
+f2 = 1.0
+
+-- 3)
+-- f3 :: Float
+-- can be changed to "f3 :: Fractional a => a" because 1.0 has type Fractional a
+f3 :: Fractional a => a
+f3 = 1.0
+
+-- 4)
+-- f4 :: Float
+-- can be changed to "f4 :: RealFrac a => a" because 1.0 has type Float which has a typeclass instance of RealFrac
+f4 :: RealFrac a => a
+f4 = 1.0
+
+-- 5)
+-- freud :: a -> a
+-- can be changed to "freud :: Ord a => a -> a" because a can be specialized to be of the constrained polymorphic typeclass Ord
+freud :: Ord a => a -> a
+freud x = x
+
+-- 6)
+-- freud' :: a -> a
+-- can be changed to "freud' :: Int -> Int" because a can be specialized to be of type Int
+freud' :: Int -> Int
+freud' x = x
+
+-- 7)
+myX7 = 1 :: Int
+
+sigmund :: Int -> Int
+-- cannot be changed to "sigmund :: a -> a" because sigmund is type inferenced to "Int -> Int" and cannot be more generalized
+sigmund x = myX7
+
+-- 8)
+myX8 = 1 :: Int
+
+sigmund' :: Int -> Int
+-- cannot be changed to "sigmund' :: Num a => a -> a" because sigmund' is type inferenced to "Int -> Int" and cannot be more generalized
+sigmund' x = myX8
+
+-- 9)
+-- jung :: Ord a => [a] -> a
+-- can be changed to "jung :: [Int] -> Int" because a can be specialized to be of type Int
+jung :: [Int] -> Int
+jung xs = head (sort xs)
+
+-- 10)
+-- young :: [Char] -> Char
+-- can be changed to "young :: Ord a => [a] -> a" because young is type inferenced to the more general "Ord a => [a] -> a"
+young :: Ord a => [a] -> a
+young xs = head (sort xs)
+
+-- 11)
+mySort :: [Char] -> [Char]
+mySort = sort
+
+signifier :: [Char] -> Char
+-- can not be changed to "signifier :: Ord a => [a] -> a" because signifier is type inferenced to "[Char] -> Char" (because of mySort) and cannot be more generalized
+signifier xs = head (mySort xs)
+
+
+-- Type-Kwon-Do Two: Electric Typealoo
+-- 1)
+chk :: Eq b => (a -> b) -> a -> b -> Bool
+chk f x y = (f x) == y
+
+-- 2)
+arith :: Num b => (a -> b) -> Integer -> a -> b
+arith f n x = (f x) * fromInteger n
 
